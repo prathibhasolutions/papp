@@ -11,7 +11,7 @@ const COURSES = [
   'SQL',
   'DSA',
   'Full Stack Web',
-  'JavaScript',
+
 ];
 
 export default function Index() {
@@ -20,7 +20,7 @@ export default function Index() {
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
         <Text style={styles.title}>Welcome to Prathibha Institute 🎓</Text>
-        <Text style={styles.subtitle}>What We Offer</Text>
+        <Text style={styles.subtitle}>Courses We Offer</Text>
 
         <View style={styles.cardGrid}>
           {COURSES.map((course) => (

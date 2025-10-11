@@ -1,50 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, StatusBar, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 
-// Course data based on your explore.tsx and website
-const COURSES = [
-  'JEE Mains',
-  'EAPCET',
-  'C Language',
-  'Python',
-  'Java',
-  'SQL',
-  'DSA',
-  'Full Stack Web',
-
+const BUSINESSES = [
+  { name: 'Prathibha Services', screen: '/services' },
+  { name: 'Prathibha Institute', screen: '/institute' },
+  { name: 'Prathibha Solutions', screen: '/solutions' },
 ];
 
-export default function Index() {
-  return (
-    <ScrollView style={styles.outerContainer}>
-      <View style={styles.container}>
-        <StatusBar barStyle="light-content" />
-        <Text style={styles.title}>Welcome to Prathibha Institute 🎓</Text>
-        <Text style={styles.subtitle}>Courses We Offer</Text>
+export default function HomeScreen() {
+  const router = useRouter();
 
-        <View style={styles.cardGrid}>
-          {COURSES.map((course) => (
-            <View key={course} style={styles.card}>
-              <Text style={styles.cardText}>{course}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <StatusBar barStyle="light-content" />
+      <Text style={styles.title}>Welcome to Prathibha</Text>
+      <Text style={styles.subtitle}>Select a Business to Continue</Text>
+
+      {BUSINESSES.map((business) => (
+        <TouchableOpacity
+          key={business.name}
+          style={styles.button}
+          onPress={() => router.push(business.screen)}
+        >
+          <Text style={styles.buttonText}>{business.name}</Text>
+        </TouchableOpacity>
+      ))}
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  outerContainer: {
-    flex: 1,
-    backgroundColor: '#121212',
-  },
   container: {
     flex: 1,
-    paddingHorizontal: 20,
-    paddingTop: 80,
-    paddingBottom: 40,
+    backgroundColor: '#121212',
     alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
   },
   title: {
     color: '#ffffff',
@@ -55,37 +47,27 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: '#00ffcc',
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
-    marginBottom: 30,
+    marginBottom: 40,
   },
-  cardGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  card: {
-    backgroundColor: '#282828',
+  button: {
+    backgroundColor: '#1F41BB',
     borderRadius: 12,
     paddingVertical: 20,
-    paddingHorizontal: 10,
-    width: '48%', // Creates a two-column layout
-    marginBottom: 15,
+    width: '90%',
     alignItems: 'center',
-    justifyContent: 'center',
-    // Adding a subtle shadow for depth
+    marginVertical: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
     elevation: 5,
   },
-  cardText: {
-    color: '#E0E0E0',
-    fontSize: 16,
-    fontWeight: '500',
-    textAlign: 'center',
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '600',
   },
 });

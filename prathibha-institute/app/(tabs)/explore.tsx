@@ -11,12 +11,9 @@ export default function ExploreScreen() {
         <ThemedText type="title" style={styles.title}>
           About Prathibha Institute
         </ThemedText>
-
         <ThemedText style={styles.paragraph}>
           We offer Comprehensive Training in Software Courses, JEE Mains, Eapcet and General Aptitude and Logical Reasoning. We are dedicated to maintaining the highest standards of academic excellence in all our programs.
         </ThemedText>
-
-
         <ThemedText type="subtitle" style={styles.sectionTitle}>
           Courses We Offer
         </ThemedText>

@@ -3,71 +3,49 @@ import { withLayoutContext, useNavigation } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet, ScrollView } from 'react-native';
 
-const { Navigator } = createMaterialTopTabNavigator();
-const MaterialTopTabs = withLayoutContext(Navigator);
-
-const DRAWER_ITEMS = [
-    { name: 'about', title: 'About' },
-    { name: 'courses', title: 'Courses' },
-    { name: 'faculty', title: 'Faculty', disabled: true },
-    { name: 'admissions', title: 'Admissions', disabled: true },
-    { name: 'contact', title: 'Contact Us', disabled: true },
-];
-
-// --- 1. The new HamburgerIcon component ---
-// This simple component uses three <View> elements to draw the lines.
+// --- Reusable Hamburger Icon Component ---
 function HamburgerIcon() {
     return (
         <View style={iconStyles.container}>
-            <View style={iconStyles.line} />
-            <View style={iconStyles.line} />
-            <View style={iconStyles.line} />
+            <View style={iconStyles.line} /><View style={iconStyles.line} /><View style={iconStyles.line} />
         </View>
     );
 }
-
 const iconStyles = StyleSheet.create({
-    container: {
-        width: 24,
-        height: 18, // Adjusted height for better proportions
-        justifyContent: 'space-between',
-    },
-    line: {
-        height: 3,
-        backgroundColor: '#fff',
-        borderRadius: 2,
-    },
+    container: { width: 24, height: 18, justifyContent: 'space-between' },
+    line: { height: 3, backgroundColor: '#fff', borderRadius: 2 },
 });
+// --- End of Icon Component ---
 
-interface CustomDrawerProps {
-    isVisible: boolean;
-    onClose: () => void;
-    navigation: any;
-}
+const { Navigator } = createMaterialTopTabNavigator();
+const MaterialTopTabs = withLayoutContext(Navigator);
+
+// --- Menu items for Prathibha Solutions ---
+const DRAWER_ITEMS = [
+    { name: 'about', title: 'About' },
+    { name: 'products', title: 'Our Products' }, // Changed from 'courses'
+    { name: 'portfolio', title: 'Portfolio', disabled: true },
+    { name: 'contact', title: 'Contact Us', disabled: true },
+];
+
+interface CustomDrawerProps { isVisible: boolean; onClose: () => void; navigation: any; }
 
 function CustomDrawer({ isVisible, onClose, navigation }: CustomDrawerProps) {
     if (!isVisible) return null;
-
     const handlePress = (screenName: string, disabled?: boolean) => {
         if (!disabled) {
             navigation.navigate(screenName);
             onClose();
         }
     };
-
     return (
         <Modal animationType="slide" transparent={true} visible={isVisible} onRequestClose={onClose}>
             <TouchableOpacity style={styles.overlay} activeOpacity={1} onPress={onClose}>
                 <View style={styles.drawerContainer}>
                     <ScrollView>
-                        <Text style={styles.drawerTitle}>Prathibha Institute</Text>
+                        <Text style={styles.drawerTitle}>Prathibha Solutions</Text>
                         {DRAWER_ITEMS.map(({ name, title, disabled }) => (
-                            <TouchableOpacity
-                                key={name}
-                                style={[styles.drawerItem, disabled && styles.disabledItem]}
-                                onPress={() => handlePress(name, disabled)}
-                                activeOpacity={disabled ? 1 : 0.2}
-                            >
+                            <TouchableOpacity key={name} style={[styles.drawerItem, disabled && styles.disabledItem]} onPress={() => handlePress(name, disabled)} activeOpacity={disabled ? 1 : 0.2}>
                                 <Text style={[styles.drawerItemText, disabled && styles.disabledText]}>{title}</Text>
                             </TouchableOpacity>
                         ))}
@@ -78,15 +56,13 @@ function CustomDrawer({ isVisible, onClose, navigation }: CustomDrawerProps) {
     );
 }
 
-export default function InstituteLayout() {
+export default function SolutionsLayout() {
     const [isDrawerVisible, setDrawerVisible] = useState(false);
     const navigation = useNavigation();
-
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerLeft: () => (
                 <TouchableOpacity onPress={() => setDrawerVisible(true)} style={{ marginLeft: 15, marginRight: 15 }}>
-                    {/* --- 2. Replaced the Text with the HamburgerIcon component --- */}
                     <HamburgerIcon />
                 </TouchableOpacity>
             ),

@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, StatusBar, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, StatusBar, TouchableOpacity, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 
 const BUSINESSES = [
-  { name: 'Prathibha Services', screen: '/services' },
-  { name: 'Prathibha Institute', screen: '/institute' },
-  { name: 'Prathibha Solutions', screen: '/solutions' },
+  { name: 'Prathibha Services', screen: '/services', logo: require('../../assets/logos/prathibha_services_logo.png') },
+  { name: 'Prathibha Institute', screen: '/institute', logo: require('../../assets/logos/prathibha_institute_logo.png') },
+  { name: 'Prathibha Solutions', screen: '/solutions', logo: require('../../assets/logos/prathibha_solutions_logo.png') },
 ];
 
 export default function HomeScreen() {
@@ -21,9 +21,12 @@ export default function HomeScreen() {
         <TouchableOpacity
           key={business.name}
           style={styles.button}
-          onPress={() => router.push(business.screen)}
+          onPress={() => router.push(business.screen as any)}
         >
-          <Text style={styles.buttonText}>{business.name}</Text>
+          <View style={styles.buttonContent}>
+            <Image source={business.logo} style={styles.logo} />
+            <Text style={styles.buttonText}>{business.name}</Text>
+          </View>
         </TouchableOpacity>
       ))}
     </ScrollView>
@@ -36,7 +39,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#121212',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
   },
   title: {
     color: '#ffffff',
@@ -55,9 +58,9 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#1F41BB',
     borderRadius: 12,
-    paddingVertical: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
     width: '90%',
-    alignItems: 'center',
     marginVertical: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -65,9 +68,25 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  buttonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  logo: {
+    // --- CHANGED ---
+    width: 80,
+    height: 80,
+    borderRadius: 40, // half of width/height
+    // --- END CHANGED ---
+    marginRight: 10,
+  },
   buttonText: {
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: '600',
+    // --- ADDED ---
+    // This allows the text to take up the rest of the space and wrap
+    flex: 1,
+    // --- END ADDED ---
   },
 });

@@ -1,5 +1,5 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { withLayoutContext, useNavigation } from 'expo-router';
+import { useNavigation } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet, ScrollView } from 'react-native';
 
@@ -17,15 +17,14 @@ const iconStyles = StyleSheet.create({
 });
 // --- End of Icon Component ---
 
-const { Navigator } = createMaterialTopTabNavigator();
-const MaterialTopTabs = withLayoutContext(Navigator);
+const Tab = createMaterialTopTabNavigator();
+import HomeScreen from './home';
+import ServicesScreen from './services';
 
 // --- Menu items for Prathibha Services ---
 const DRAWER_ITEMS = [
-    { name: 'about', title: 'About' },
-    { name: 'services', title: 'Our Services' }, // Changed from 'courses'
-    { name: 'team', title: 'Our Team', disabled: true },
-    { name: 'contact', title: 'Contact Us', disabled: true },
+    { name: 'home', title: 'Home' },
+    { name: 'services', title: 'Our Services' }, // only these two tabs will be shown
 ];
 
 interface CustomDrawerProps { isVisible: boolean; onClose: () => void; navigation: any; }
@@ -44,9 +43,9 @@ function CustomDrawer({ isVisible, onClose, navigation }: CustomDrawerProps) {
                 <View style={styles.drawerContainer}>
                     <ScrollView>
                         <Text style={styles.drawerTitle}>Prathibha Services</Text>
-                        {DRAWER_ITEMS.map(({ name, title, disabled }) => (
-                            <TouchableOpacity key={name} style={[styles.drawerItem, disabled && styles.disabledItem]} onPress={() => handlePress(name, disabled)} activeOpacity={disabled ? 1 : 0.2}>
-                                <Text style={[styles.drawerItemText, disabled && styles.disabledText]}>{title}</Text>
+                        {DRAWER_ITEMS.map(({ name, title }) => (
+                            <TouchableOpacity key={name} style={styles.drawerItem} onPress={() => handlePress(name)} activeOpacity={0.8}>
+                                <Text style={styles.drawerItemText}>{title}</Text>
                             </TouchableOpacity>
                         ))}
                     </ScrollView>
@@ -72,11 +71,10 @@ export default function ServicesLayout() {
     return (
         <View style={{ flex: 1 }}>
             <CustomDrawer isVisible={isDrawerVisible} onClose={() => setDrawerVisible(false)} navigation={navigation} />
-            <MaterialTopTabs>
-                {DRAWER_ITEMS.filter(item => !item.disabled).map(item => (
-                    <MaterialTopTabs.Screen key={item.name} name={item.name} options={{ title: item.title }} />
-                ))}
-            </MaterialTopTabs>
+            <Tab.Navigator screenOptions={{ swipeEnabled: true }}>
+                <Tab.Screen name="home" component={HomeScreen} options={{ title: 'Home' }} />
+                <Tab.Screen name="services" component={ServicesScreen} options={{ title: 'Our Services' }} />
+            </Tab.Navigator>
         </View>
     );
 }

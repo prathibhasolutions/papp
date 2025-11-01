@@ -1,14 +1,11 @@
-// This line checks if we are running a "development" build.
-const IS_DEV = process.env.APP_VARIANT === 'development';
-
 export default {
   "expo": {
-    "name": IS_DEV ? "Prathibha (Dev)" : "Prathibha", // Dynamic app name
-    "slug": "prathibha-institute",
+    "name": "Prathibha",
+    "slug": "Prathibha",
     "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "prathibhainstitute",
+    "scheme": "prathibha",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -23,8 +20,8 @@ export default {
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": IS_DEV ? "com.prathibha_institute.prathibhainstitute.dev" : "com.prathibha_institute.prathibhainstitute", // Dynamic package name
-      "versionCode": 3 // Incrementing for the new build
+      "package": "com.prathibha.prathibha",
+      "versionCode": 3
     },
     "web": {
       "output": "static",
@@ -60,7 +57,7 @@ export default {
     },
     "updates": {
       "url": "https://u.expo.dev/5fbcb08c-34b2-4e3f-9638-e07b91212819",
-      "channel": "main" // This is the crucial channel setting
+      "channel": "main"
     }
   }
 };

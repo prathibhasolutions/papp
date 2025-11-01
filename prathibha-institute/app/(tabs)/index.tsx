@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, ScrollView, StatusBar, TouchableOpacity, Image 
 import { useRouter } from 'expo-router';
 
 const BUSINESSES = [
-  { name: 'Prathibha Services', screen: '/services', logo: require('../../assets/logos/prathibha_services_logo.png'), bgColor: '#1F41BB' },
+  { name: 'Prathibha Services', screen: '/services', logo: require('../../assets/logos/prathibha_services_logo.png'), bgColor: '#ADD8E6' }, // light blue
   { name: 'Prathibha Institute', screen: '/institute', logo: require('../../assets/logos/prathibha_institute_logo.png'), bgColor: '#7E8CAD' },
-  { name: 'Prathibha Solutions', screen: '/solutions', logo: require('../../assets/logos/prathibha_solutions_logo.png'), bgColor: '#F39C12' },
+  { name: 'Prathibha Solutions', screen: '/solutions', logo: require('../../assets/logos/prathibha_solutions_logo.png'), bgColor: '#90EE90' }, // light green
 ];
 
 export default function HomeScreen() {

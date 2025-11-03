@@ -11,12 +11,16 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: colorScheme === 'dark' ? '#00ffcc' : '#1F41BB',
-        tabBarInactiveTintColor: 'gray',
-        headerShown: false, // Hides the default header for a cleaner look
+        tabBarActiveTintColor: '#00ffcc',
+        tabBarInactiveTintColor: '#64748b',
+        headerShown: false,
         tabBarStyle: {
-          backgroundColor: colorScheme === 'dark' ? '#121212' : '#FFFFFF',
-          borderTopWidth: 0, // Removes the top border line on the tab bar
+          backgroundColor: '#121212',
+          marginBottom: 40,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: 'bold',
         },
       }}>
       <Tabs.Screen
@@ -24,16 +28,24 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'home' : 'home-outline'} size={24} color={color} />
+            <Ionicons
+              name={focused ? 'home' : 'home-outline'}
+              size={20}
+              color={color}
+            />
           ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
+          title: 'Discover',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'compass' : 'compass-outline'} size={24} color={color} />
+            <Ionicons
+              name={focused ? 'compass' : 'compass-outline'}
+              size={20}
+              color={color}
+            />
           ),
         }}
       />

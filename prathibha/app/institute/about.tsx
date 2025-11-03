@@ -4,9 +4,9 @@ import { View, Text, Image, ScrollView } from 'react-native';
 export default function About() {
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#121212', padding: 20 }}>
-            <Text style={{ color: '#fff', fontSize: 22, fontWeight: 'bold', marginBottom: 12 }}>About Prathibha Institute</Text>
+            <Text style={{ color: '#fff', fontSize: 22, fontWeight: 'bold', marginBottom: 12 }}>About Prathibha</Text>
             <Text style={{ color: '#fff', marginBottom: 10 }}>
-                Welcome to Prathibha Institute, a distinguished educational institute committed to shaping futures and fostering innovation. Our mission is to provide a transformative learning experience that equips students with the skills, knowledge, and mindset needed to thrive in an ever-evolving world.
+                Welcome to Prathibha, a distinguished educational institute committed to shaping futures and fostering innovation. Our mission is to provide a transformative learning experience that equips students with the skills, knowledge, and mindset needed to thrive in an ever-evolving world.
             </Text>
             <Text style={{ color: '#00ffcc', fontWeight: 'bold', marginTop: 16, marginBottom: 6 }}>Our Founders</Text>
             <View style={{ marginBottom: 16 }}>

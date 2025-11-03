@@ -1,10 +1,14 @@
 import { Stack } from 'expo-router';
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 
 export default function RootLayout() {
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        contentStyle: { backgroundColor: '#0f172a' },
+      }}
+    >
       {/* This screen is the main home screen with the three business buttons */}
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
@@ -52,6 +56,30 @@ export default function RootLayout() {
               source={require('../assets/logos/prathibha_solutions_logo.png')}
               style={{ width: 35, height: 35, borderRadius: 17.5, marginRight: 15 }}
             />
+          ),
+        }}
+      />
+
+      {/* --- Nursery Screen with Logo --- */}
+      <Stack.Screen
+        name="nursery"
+        options={{
+          title: 'Prathibha Nursery',
+          headerStyle: { backgroundColor: '#121212' },
+          headerTintColor: '#fff',
+          headerRight: () => (
+            <View style={{ width: 35, height: 35, borderRadius: 17.5, marginRight: 15, overflow: 'hidden' }}>
+              <Image
+                source={require('../assets/logos/PrathibhaNursery.png')}
+                style={{
+                  width: 50,
+                  height: 50,
+                  marginTop: -7.5,
+                  marginLeft: -7.5
+                }}
+                resizeMode="cover"
+              />
+            </View>
           ),
         }}
       />

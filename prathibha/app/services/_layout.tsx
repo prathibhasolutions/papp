@@ -2,6 +2,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { useNavigation } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 // --- Reusable Hamburger Icon Component ---
 function HamburgerIcon() {
@@ -19,12 +20,18 @@ const iconStyles = StyleSheet.create({
 
 const Tab = createMaterialTopTabNavigator();
 import HomeScreen from './home';
+import AboutScreen from './about';
 import ServicesScreen from './services';
+import ProjectsScreen from './projects';
+import ContactScreen from './contact';
 
 // --- Menu items for Prathibha Services ---
 const DRAWER_ITEMS = [
     { name: 'home', title: 'Home' },
-    { name: 'services', title: 'Our Services' }, // only these two tabs will be shown
+    { name: 'about', title: 'About Us' },
+    { name: 'services', title: 'Our Services' },
+    { name: 'projects', title: 'Projects' },
+    { name: 'contact', title: 'Contact Us' },
 ];
 
 interface CustomDrawerProps { isVisible: boolean; onClose: () => void; navigation: any; }
@@ -69,11 +76,73 @@ export default function ServicesLayout() {
     }, [navigation]);
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: '#1e293b' }}>
             <CustomDrawer isVisible={isDrawerVisible} onClose={() => setDrawerVisible(false)} navigation={navigation} />
-            <Tab.Navigator screenOptions={{ swipeEnabled: true }}>
-                <Tab.Screen name="home" component={HomeScreen} options={{ title: 'Home' }} />
-                <Tab.Screen name="services" component={ServicesScreen} options={{ title: 'Our Services' }} />
+            <Tab.Navigator
+                screenOptions={{
+                    swipeEnabled: true,
+                    tabBarActiveTintColor: '#ff6b35',
+                    tabBarInactiveTintColor: '#888',
+                    tabBarStyle: {
+                        backgroundColor: '#121212',
+                        marginBottom: 40
+                    },
+                    tabBarIndicatorStyle: { backgroundColor: '#ff6b35' },
+                    tabBarLabelStyle: { fontSize: 12, fontWeight: 'bold' },
+                    tabBarScrollEnabled: true,
+                }}
+                tabBarPosition="bottom"
+            >
+                <Tab.Screen
+                    name="home"
+                    component={HomeScreen}
+                    options={{
+                        title: 'Home',
+                        tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
+                            <Ionicons name={focused ? 'home' : 'home-outline'} size={20} color={color} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="about"
+                    component={AboutScreen}
+                    options={{
+                        title: 'About',
+                        tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
+                            <Ionicons name={focused ? 'information-circle' : 'information-circle-outline'} size={20} color={color} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="services"
+                    component={ServicesScreen}
+                    options={{
+                        title: 'Our Services',
+                        tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
+                            <Ionicons name={focused ? 'construct' : 'construct-outline'} size={20} color={color} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="projects"
+                    component={ProjectsScreen}
+                    options={{
+                        title: 'Projects',
+                        tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
+                            <Ionicons name={focused ? 'folder' : 'folder-outline'} size={20} color={color} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="contact"
+                    component={ContactScreen}
+                    options={{
+                        title: 'Contact',
+                        tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
+                            <Ionicons name={focused ? 'call' : 'call-outline'} size={20} color={color} />
+                        ),
+                    }}
+                />
             </Tab.Navigator>
         </View>
     );

@@ -1,7 +1,7 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { withLayoutContext, useNavigation } from 'expo-router';
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, StyleSheet, ScrollView, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 // --- Reusable Hamburger Icon Component ---
@@ -126,7 +126,18 @@ export default function NurseryLayout() {
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerLeft: () => (
-                <TouchableOpacity onPress={() => setDrawerVisible(true)} style={{ marginLeft: 15, marginRight: 15 }}>
+                <View style={{ marginLeft: 15, marginRight: 12, flexDirection: 'row', alignItems: 'center' }}>
+                    <View style={{ width: 35, height: 35, borderRadius: 17.5, overflow: 'hidden' }}>
+                        <Image
+                            source={require('../../assets/logos/PrathibhaNursery.png')}
+                            style={{ width: 50, height: 50, marginTop: -7.5, marginLeft: -7.5 }}
+                            resizeMode="cover"
+                        />
+                    </View>
+                </View>
+            ),
+            headerRight: () => (
+                <TouchableOpacity onPress={() => setDrawerVisible(true)} style={{ marginRight: 15 }}>
                     <HamburgerIcon />
                 </TouchableOpacity>
             ),

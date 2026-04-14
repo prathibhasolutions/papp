@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Prathibha Group</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0b0c2a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Prathibha" />
+  <link rel="apple-touch-icon" href="logos/prathibha.png" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 28px 20px 36px;
+      background: linear-gradient(145deg, #0b0c2a 0%, #0f1a35 40%, #0a1f1a 70%, #1a0b2e 100%);
+      color: #f0f0f5;
+    }
+
+    /* ── Decorative blobs ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 40% at 20% 10%, rgba(0, 32, 96, 0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 35% at 80% 20%, rgba(112, 48, 160, 0.35) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 40% at 10% 80%, rgba(0, 176, 80, 0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 35% at 85% 85%, rgba(0, 32, 96, 0.30) 0%, transparent 65%);
+      z-index: 0;
+    }
+
+    /* ── Content wrapper ── */
+    .content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .header-logo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.12), 0 12px 36px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+
+    .header-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .header h1 {
+      font-size: clamp(22px, 5.5vw, 28px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #ffffff, #c8d4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      margin-top: 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Cards ── */
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: #f0f0f5;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+      transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+    }
+
+    /* Card colorful glassy backgrounds */
+    .card-institute  { background: linear-gradient(135deg, rgba(0,32,96,0.70) 0%, rgba(0,52,140,0.55) 100%); }
+    .card-solutions  { background: linear-gradient(135deg, rgba(0,100,48,0.70) 0%, rgba(0,160,70,0.45) 100%); }
+    .card-tech       { background: linear-gradient(135deg, rgba(90,30,140,0.70) 0%, rgba(130,50,180,0.50) 100%); }
+    .card-services   { background: linear-gradient(135deg, rgba(0,55,120,0.70) 0%, rgba(20,80,170,0.50) 100%); }
+
+    .card:hover,
+    .card:focus-visible {
+      transform: translateY(-3px) scale(1.01);
+      outline: none;
+    }
+
+    .card-institute:hover  { box-shadow: 0 12px 36px rgba(0,84,204,0.45);  border-color: rgba(100,160,255,0.35); }
+    .card-solutions:hover  { box-shadow: 0 12px 36px rgba(0,176,80,0.40);  border-color: rgba(80,220,120,0.35); }
+    .card-tech:hover       { box-shadow: 0 12px 36px rgba(130,60,200,0.45); border-color: rgba(180,120,255,0.35); }
+    .card-services:hover   { box-shadow: 0 12px 36px rgba(30,90,200,0.45); border-color: rgba(100,160,255,0.35); }
+
+    .card:active {
+      transform: scale(0.97);
+    }
+
+    /* Shimmer overlay on hover */
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0) 70%);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .card:hover::after { opacity: 1; }
+
+    .card-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #fff;
+      flex-shrink: 0;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .card-body {
+      flex: 1;
+      min-width: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-arrow {
+      flex-shrink: 0;
+      color: rgba(255,255,255,0.4);
+      transition: transform 0.2s, color 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card:hover .card-arrow {
+      transform: translateX(5px);
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+    }
+
+    @media (min-width: 480px) {
+      .cards { gap: 16px; }
+      .card  { padding: 16px 20px; }
+      .card-logo { width: 66px; height: 66px; }
+    }
+  </style>
+</head>
+<body>
+<div class="content">
+
+  <header class="header">
+    <div class="header-logo">
+      <img src="logos/prathibha.png" alt="Prathibha" />
+    </div>
+    <h1>Prathibha Group</h1>
+    <p>Select a portal to continue</p>
+  </header>
+
+  <main class="cards">
+
+    <a class="card card-institute" href="https://www.prathibhainstitutions.com" target="_blank" rel="noopener noreferrer" tabindex="0">
+      <div class="card-logo">
+        <img src="logos/prathibhainstitute.png" alt="Prathibha Institute" />
+      </div>
+      <div class="card-body">
+        <div class="card-title">Prathibha Institute</div>
+        <div class="card-subtitle">prathibhainstitutions.com</div>
+      </div>
+      <svg class="card-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M7 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+    <a class="card card-solutions" href="https://www.prathibhasolutions.com" target="_blank" rel="noopener noreferrer" tabindex="0">
+      <div class="card-logo">
+        <img src="logos/prathibhasolutions.png" alt="Prathibha Solutions" />
+      </div>
+      <div class="card-body">
+        <div class="card-title">Prathibha Solutions</div>
+        <div class="card-subtitle">prathibhasolutions.com</div>
+      </div>
+      <svg class="card-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M7 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+    <a class="card card-tech" href="https://tech.prathibhasolutions.com" target="_blank" rel="noopener noreferrer" tabindex="0">
+      <div class="card-logo">
+        <img src="logos/prathibhatechnologies.png" alt="Prathibha Technologies" />
+      </div>
+      <div class="card-body">
+        <div class="card-title">Prathibha Technologies</div>
+        <div class="card-subtitle">tech.prathibhasolutions.com</div>
+      </div>
+      <svg class="card-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M7 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+    <a class="card card-services" href="https://www.prathibhaservices.com" target="_blank" rel="noopener noreferrer" tabindex="0">
+      <div class="card-logo">
+        <img src="logos/prathibha.png" alt="Prathibha Services" />
+      </div>
+      <div class="card-body">
+        <div class="card-title">Prathibha Services</div>
+        <div class="card-subtitle">prathibhaservices.com</div>
+      </div>
+      <svg class="card-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M7 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 Prathibha Group &middot; All rights reserved
+  </footer>
+
+</div>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js');
+    });
+  }
+</script>
+
+</body>
+</html>

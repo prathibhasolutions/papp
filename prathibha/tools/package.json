@@ -1,7 +1,0 @@
-{
-    "name": "tools",
-    "private": true,
-    "dependencies": {
-        "sharp": "^0.32.0"
-    }
-}

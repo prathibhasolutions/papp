@@ -2,7 +2,7 @@
   "name": "Prathibha Group",
   "short_name": "Prathibha",
   "description": "Prathibha Group — Quick access to all portals",
-  "start_url": "/",
+  "start_url": "/papp/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0b0c2a",

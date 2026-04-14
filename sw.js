@@ -1,11 +1,11 @@
 const CACHE_NAME = 'prathibha-v1';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/logos/prathibha.png',
-  '/logos/prathibhainstitute.png',
-  '/logos/prathibhasolutions.png',
-  '/logos/prathibhatechnologies.png'
+  '/papp/',
+  '/papp/index.html',
+  '/papp/logos/prathibha.png',
+  '/papp/logos/prathibhainstitute.png',
+  '/papp/logos/prathibhasolutions.png',
+  '/papp/logos/prathibhatechnologies.png'
 ];
 
 // Install: cache all assets

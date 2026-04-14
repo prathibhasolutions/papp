@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.prathibha.group",
+      "sha256_cert_fingerprints": [
+        "6A:47:36:DF:74:5B:6F:CE:53:8D:58:48:DB:AE:A5:3C:AE:AC:B4:39:6D:E4:D6:72:25:F9:F3:DA:E5:D5:8F:A5"
+      ]
+    }
+  }
+]

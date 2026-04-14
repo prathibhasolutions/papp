@@ -312,6 +312,26 @@
       navigator.serviceWorker.register('/papp/sw.js');
     });
   }
+
+  // --- Notification at 6:20 PM ---
+  function scheduleNotification(hour, minute, title, body) {
+    if (Notification.permission !== "granted") {
+      Notification.requestPermission();
+    }
+    const now = new Date();
+    const target = new Date();
+    target.setHours(hour, minute, 0, 0);
+    if (target < now) target.setDate(target.getDate() + 1);
+    const timeout = target - now;
+    setTimeout(() => {
+      if (Notification.permission === "granted") {
+        new Notification(title, { body });
+      }
+    }, timeout);
+  }
+
+  // Schedule notification for 6:20 PM
+  scheduleNotification(18, 20, "Reminder", "This is your 6:20 PM notification!");
 </script>
 
 </body>
